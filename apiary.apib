@@ -262,3 +262,57 @@ Get a single relation with all linked relations.
             "tos": []
             }
         ]
+        
+# Group Registrations
+#### Resource type
+* Work = 0,
+* Cost = 1,
+* Travel = 2,
+* Absence = 3
+
+## Add registration [/registrations/add]
+
+### Add [POST]
+
++ Request Add time / work registration (application/json)
+    + Attributes
+        + resourceType (number, required)
+        + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
+        + relationIdentifier: `APR00001` (string, required) - Unique identifier of the relation
+        + userIdentifier (string, required) - Email address of the employee
+        + resourceIdentifier (string, required) - Pricelist item code
+        + timeFrom: `11:00` (string, required)
+        + timeTo: `12:00` (string, required)
+
++ Response 200 (application/json)
+
++ Request Add product / cost registration (application/json)
+    + Attributes
+        + resourceType (number, required)
+        + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
+        + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
+        + relationIdentifier: `APR00001` (string, required) - Unique identifier of the relation
+        + userIdentifier (string, required) - Email address of the employee
+        + resourceIdentifier (required, string) - Pricelist item code
+        + remarkInternal  (string )
+        + remarkInvoice  (string)
+
++ Response 200 (application/json)
+
++ Request  Add travel registration (application/json)
+    + Attributes
+        + resourceType (number, required)
+        + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
+    
++ Response 200 (application/json)
+
++ Request Add absence registration (application/json)
+    + Attributes
+        + resourceType (number, required)
+        + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
+        
++ Response 200 (application/json)
+
+
+# Group Documents
+# Group Tasks
