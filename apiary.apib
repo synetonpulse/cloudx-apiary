@@ -1,0 +1,264 @@
+FORMAT: 1A
+HOST: https://api.adminpulse.be/connect
+
+# AdminPulse API documentation
+
+This documentation describes the adminpulse api endpoints.
+In case you have any feedback or miss a certain functionality, let us know via adminpulse@syneton.be
+
+- API Base URL : <code>api.adminpulse.be/connect</code>
+- API Identity token URL : <code>login.adminpulse.be/connect/token</code>
+- API Identity authorize URL : <code>login.adminpulse.be/connect/authorize</code>
+
+### Authentication
+OAuth2 will be used to protect adminpulse endpoints.
+Before you can start using our endpoints, send a request to adminpulse@syneton.be to request a <code>client_id</code> and <code>client_secret</code>.
+Keep in mind that you will have to register a possible redirect URL as well. This will be the URL being called by our OAuth authentication.
+
+<i>example</i> : https://yourcompany/adminpulse/callback
+
+###Scopes
+<ul>
+<li>api.connect</li>
+</ul>
+
+# Group Relations
+#### CRM type
+* 0 = Other
+* 2 = Prospect
+* 3 = Customer
+
+#### Type
+* 0 = Company
+* 2 = Sole proprietor
+* 3 = Person
+
+#### Relation link types
+* 1 = Contacts (just a regular contact)
+* 2 = Beneficiaries (begunstigde)
+* 3 = Trustee (lasthebber) 
+* 4 = Company owner (bedrijfsleider)
+* 5 = Partner
+* 6 = Shareholder (aandeelhouder)
+* 7 = Auditor (bedrijfsrevisor, commisaris)
+* 8 = Control by other means (controle door andere middelen)
+
+#### Company owner position
+* CEO = 0,
+* Manager = 1,
+* Director = 2,
+* Administrator = 3,
+* ExecutiveManager = 4,
+* Associate = 5,
+* ManagingDirector = 6,
+* DailyManagementNonProfit = 7,
+* ManagementNonProfit = 8,
+* Liquidator = 9
+
+####Accounting software types
+* 0 = Unknown
+* 1 = Office
+* 2 = Yuki
+* 3 = ExactOnline
+* 4 = ExpertMPlus
+* 5 = Sage100
+* 6 = SageBob
+* 7 = WinBooks
+* 8 = Octopus
+* 9 = VeroCount
+* 10 = Quadra
+* 11 = Wings
+* 12 = Horus
+* 13 = WinAuditor
+* 14 = Xero
+* 15 = SageOne
+* 16 = QuickBooks
+* 17 = Other
+* 18 = Popsy / Allegro
+* 19 = Cubic
+* 20 = TopPower
+* 21 = Venice
+* 22 = Adsolut
+* 23 = ExactProacc
+
+####Social Secretariat
+* Other = 1,
+* Attentia = 2,
+* Securex = 3,
+* Acerta = 4,
+* Partena = 5,
+* Alia = 6,
+* Sodalis = 7,
+* Randstad = 8,
+* SDWorx = 9,
+* Sofidi = 10,
+* Accuria = 11,
+* Caritas = 12,
+* Sodiwe = 13,
+* Xerius = 14,
+* Liantis = 15,
+* Incozina = 16,
+* Salar = 17,
+* Sodibe = 18,
+* HDI = 19,
+* UCM = 20,
+* GroupS = 21,
+* NatPat = 22,
+* Unknown = 254,
+* None = 255
+
+####Social Security Fund
+* Other = 1,
+* GroupS = 2,
+* Xerius = 3,
+* Liantis = 4,
+* Partena = 5,
+* Acerta = 6,
+* Securex = 7,
+* Incozina = 8,
+* Multipen = 9,
+* Entraide = 10,
+* Ucm = 11,
+* NationalFund = 12,
+* Nisse = 13, 
+* Unknown = 254,
+* None = 255
+
+#### Vat periodicity
+* Unknown = 0,
+* Monthly = 1,
+* Quarterly = 2,
+* ExemptionSmallEnterprise = 3,
+* ExemptionAgriculture = 4,
+* Yearly = 5,
+* ExemptionArticle44 = 6
+
+#### Risk level (anti money laundering)
+* Low = 0,
+* Standard = 1,
+* High = 100,
+
+#### Relation link From | To
+A relation link will be available in both directions. 
+A relation will be <code>Partner</code> (defined as From), whereas the other side of the relation will be described as <code>Partner Of</code> (defined as To)
+
+## List all relations [/relations?page={page}&pageSize={pageSize}&lastSyncTime={lastSyncTime}]
+
+### GET [GET]
+List all relations with linked relations included.
+
++ Parameters
+    + page (number, optional, `0`) ... When using paged request, pass in page number.
+    + pageSize (number, optional, `50`) ... Number of results to return per page.
+    + lastSyncTime (string, optional, `10102010`) ... Get changes newer than the given last sync time. This will allow partial updates. Format ddMMyyyy`)
+
++ Response 200 (application/json)
+
+        [
+            {
+            "results": [
+                {
+                    "lastSyncDate": "2019-07-16T11:19:58.2778128",
+                    "uniqueIdentifier": "APR00084",
+                    "name": "Muziek en Co",
+                    "addressStreet": "De Regenboog",
+                    "addressNumber": "11",
+                    "addressCity": "Mechelen",
+                    "addressZipCode": "2800",
+                    "addressCountryCode": "BE",
+                    "addressCountry": "Belgium",
+                    "legalForm": "BV",
+                    "email": "bart.dekeersmaeker@syneton.be",
+                    "phone": "+32 3 755 55 55",
+                    "mobile": "+32 479 99 99 99",
+                    "legalForm": "NV",
+                    "vatNumber": "BE 0420.495.592",
+                    "totalRisk": 100,
+                    "purposeTransaction": "Anti - witwas : Doel van de relatie",
+                    "natureTransaction": "Anti - witwas : Aard van de transactie",
+                    "ubo": {
+                        "relationUboDetails": [
+                            {
+                                "uniqueIdentifier": "APR00141"
+                            },
+                            {
+                                "uniqueIdentifier": "APR00127"
+                            }
+                        ]
+                    }
+                ],
+            "pageCount": 2,
+            "pageSize": 5,
+            "totalRowCount": 7
+            }
+            
+        ]
+
+## Single relation [/relations/{uniqueidentifier}]
+
+### GET [GET]
+Get a single relation with all linked relations.
+
++ Parameters
+    + uniqueidentifier (string, required, `APR00132`) The unique identifier, as defined by Admin Pulse.
+
++ Response 200 (application/json)
+
+        [
+            {
+            "lastSyncDate": "2019-07-01T11:19:58.2778128",
+            "uniqueIdentifier": "APR00084",
+            "name": "Muziek en Co",
+            "addressStreet": "Bosdorp",
+            "addressNumber": "11",
+            "addressCity": "Mechelen",
+            "addressZipCode": "2800",
+            "addressCountryCode": "BE",
+            "addressCountry": "Belgium",
+            "email": "bart.dekeersmaeker@syneton.be",
+            "phone": "+32 3 755 55 55",
+            "mobile": "+32 479 99 99 99",
+            "legalForm": "NV",
+            "vatNumber": "BE 0420.222.333",
+            "totalRisk": 100,
+            "purposeTransaction": "Anti - witwas : Doel van de relatie",
+            "natureTransaction": "Anti - witwas : Aard van de transactie",
+            "accountingSoftware": 22,
+            "accountingAccessCode": "-xyz-",
+            "accountingDigitalMailbox": "sample@inbox.com",
+            "accountingRelationcode": "rel-123",
+            "ubo": {
+                "relationUboDetails": [
+                    {
+                        "uniqueIdentifier": "APR00141"
+                    },
+                    {
+                        "uniqueIdentifier": "APR00127"
+                    }
+                ]
+            },
+            "froms": [
+                {
+                    "linkType": 1,
+                    "uniqueIdentifier": "APR00002"
+                },
+                {
+                    "linkType": 6,
+                    "uniqueIdentifier": "APR00141",
+                    "shares": 50,
+                    "votes": 50
+                },
+                {
+                    "linkType": 6,
+                    "uniqueIdentifier": "APR00127",
+                    "shares": 60,
+                    "votes": 60
+                },
+                {
+                    "linkType": 4,
+                    "uniqueIdentifier": "APR00010"
+                }
+            ],
+            "tos": []
+            }
+        ]
