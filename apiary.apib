@@ -276,43 +276,119 @@ Get a single relation with all linked relations.
 
 + Request Add time / work registration (application/json)
     + Attributes
-        + resourceType (number, required)
+        + resourceType: `0` (number, required)
         + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
         + relationIdentifier: `APR00001` (string, required) - Unique identifier of the relation
         + userIdentifier (string, required) - Email address of the employee
         + resourceIdentifier (string, required) - Pricelist item code
         + timeFrom: `11:00` (string, required)
         + timeTo: `12:00` (string, required)
+        + remarkInternal  (string)
+        + remarkInvoice  (string)
 
 + Response 200 (application/json)
 
 + Request Add product / cost registration (application/json)
     + Attributes
-        + resourceType (number, required)
+        + resourceType: `1` (number, required)
         + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
         + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
         + relationIdentifier: `APR00001` (string, required) - Unique identifier of the relation
         + userIdentifier (string, required) - Email address of the employee
         + resourceIdentifier (required, string) - Pricelist item code
-        + remarkInternal  (string )
+        + quantity (required, number)
+        + remarkInternal  (string)
         + remarkInvoice  (string)
 
 + Response 200 (application/json)
 
 + Request  Add travel registration (application/json)
     + Attributes
-        + resourceType (number, required)
+        + resourceType: `2` (number, required)
         + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
+        + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
+        + relationIdentifier: `APR00001` (string, required) - Unique identifier of the relation
+        + userIdentifier (string, required) - Email address of the employee
+        + resourceIdentifier (required, string) - Pricelist item code
+        + quantity (required, number)
+        + remarkInternal  (string)
+        + remarkInvoice  (string)
     
 + Response 200 (application/json)
 
 + Request Add absence registration (application/json)
     + Attributes
-        + resourceType (number, required)
+        + resourceType: `3` (number, required)
         + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
+        + relationIdentifier: `APR00001` (string, required) - Unique identifier of the relation
+        + userIdentifier (string, required) - Email address of the employee
+        + resourceIdentifier (string, required) - Pricelist item code
+        + timeFrom: `11:00` (string, required)
+        + timeTo: `12:00` (string, required)
+        + remarkInternal  (string)
+        + remarkInvoice  (string)
         
 + Response 200 (application/json)
 
-
 # Group Documents
+#### Document types
+* Unknown = -1,
+* CODA = 3,
+* Eid = 10,
+* Other = 13,
+* VatReceiptBelgium = 16,
+* UBOLetter = 17,
+* AuthorizationList = 19,
+* FgovIntracom = 20,
+* FodPersonalIncomeTaxPdf = 21,
+* FgovCitReceipt (Corporate income tax, vennootschapsbelasting ontvangstbewijs) = 22 
+* FgovCustomerListing = 28 (Klantenlisting / BTW listing),
+* NbbAnnualAccountPayment = 30,
+* NbbAnnualAccount = 31,
+* NbbAnnualAccountPaymentRequest = 35,
+* FodPersonalIncomeTaxExcelReceipt = 33, 
+* FodPersonalIncomeTaxExcelMandatesDeclarationStatus = 34,
+* Registration list (adminpulse registration xlsx) = 1000,
+* Fgov28120 = 28120,
+* Fgov28150 = 28150,
+* Fgov273 = 2730,
+* Fgov273A = 2734,
+* Fgov273S = 2735,
+
+## Add document [/documents/add]
+
+### Add [POST]
+* Form-data upload of a single document.
+* In case *documenttype = -1*, the document will be *recognized* by AdminPulse.
+
++ Request (form-data)
+    + Attributes
+        + file (object, required) - form-data File
+        + fileName  (string, required)
+        + documentType (number, required)
+        + creationDate: `2020-12-30` (string) - Date format as yyyy-mm-dd
+        + documentDate: `2015-12-30` (string) - Date format as yyyy-mm-dd (will be used as document reference date)
+        + relationIdentifier: `APR00001` (string) - Unique identifier of the relation
+        + tagNames: `2020;PB` (string) - Seperated list of tags. Note : Tags will not be created when they don't exist.
++ Response 200 (application/json)
+
 # Group Tasks
+#### Task status types
+* ToDo = 0,
+* InProgress = 1,
+* Done = 2
+
+## Update status [/tasks/updateStatus]
+
+### Update status [POST]
+
++ Request (application/json)
+    + Attributes
+        + deadline: `2020-12-30` (string, required) - Date format as yyyy-mm-dd
+        + mainTaskName: `BTW listing`  (string, required)
+        + subTaskName: `BTW listing opstellen`  (string, required)
+        + inapplicable (boolean)
+        + isBlocked (boolean)
+        + status: `2` (number)
+
++ Response 200 (application/json)
