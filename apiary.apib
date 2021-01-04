@@ -335,20 +335,42 @@ Get a single relation with all linked relations.
 * UBOLetter = 17,
 * AuthorizationList = 19,
 * FgovIntracom = 20,
-* FodPersonalIncomeTaxPdf = 21,
 * FgovCitReceipt (Corporate income tax, vennootschapsbelasting ontvangstbewijs) = 22 
-* FgovCustomerListing = 28 (Klantenlisting / BTW listing),
-* NbbAnnualAccountPayment = 30,
-* NbbAnnualAccount = 31,
-* NbbAnnualAccountPaymentRequest = 35,
+* Klantenlisting / BTW listing = 28 ,
+* Jaarrekening betaalbevestiging = 30,
+* Jaarrekening = 31,
+* Jaarrekening betaalverzoek = 35,
 * FodPersonalIncomeTaxExcelReceipt = 33, 
 * FodPersonalIncomeTaxExcelMandatesDeclarationStatus = 34,
+* KBO uittreksel = 36
+* PB - Tax On Web PDF = 21,
+* PB - Aanslagbiljet = 37,
+* PB - Voorbereiding van de aangifte in de personenbelasting = 38,
+* PB - Voorstel van vereenvoudigde aangifte = 39,
+* FOD - Inkomsten van buitenlandse oorsprong = 40,
+* Contract - Rental agreement / Huurovereenkomst = 5000,
+* Contract - Description of the location / Plaatsbeschrijving = 5001,
+
+* Fiche 274 = 27400,
+* Fiche 281.10 - Lonen = 28110,
+* Fiche 281.11 - Pensioenfiche = 28111,
+* Fiche 281.11 - Pensioenfiche - Betalingsfiche (PDOS) = 281110,
+* Fiche 281.13 - Werkloosheidsuitkeringen = 28113,
+* Fiche 281.15 - Inkomsten uit pensioensparen = 28115,
+* Fiche 281.18 - Vervangingsinkomen = 28118,
+* Fiche 281.20 - Bezoldigingen van bedrijfsleiders = 28120,
+* Fiche 281.50 - Commissies, makelaarslonen, handelsrestorno’s, vacatiegelden, betalingen en andere voordelen alle aard = 28150,
+* Fiche 281.61 - Leningen = 28161,
+* Fiche 281.62 - Levensverzekering = 28162,
+* Fiche 281.71 - Liveraliteiten - Giften in geld = 28171,
+* Fiche 281.81 - Dienstencheques = 28181,
+* Fiche 281.90 - Teruggave sociale bijdrage = 28190,
+
+* 273 = 2730,
+* 273A = 2734,
+* 273S = 2735,
+
 * Registration list (adminpulse registration xlsx) = 1000,
-* Fgov28120 = 28120,
-* Fgov28150 = 28150,
-* Fgov273 = 2730,
-* Fgov273A = 2734,
-* Fgov273S = 2735,
 
 ## Add document [/documents/add]
 
@@ -366,6 +388,26 @@ Get a single relation with all linked relations.
         + relationIdentifier: `APR00001` (string) - Unique identifier of the relation
         + tagNames: `2020;PB` (string) - Seperated list of tags. Note : Tags will not be created when they don't exist.
 + Response 200 (application/json)
+
+## Get tags [/documents/tags]
+
+### Tags [GET]
+* Multiple tags can be assigned when adding a document.
+* This method will return all available tags.
+
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Personal"
+            },
+            {
+                "name": "Prio"
+            },
+            {
+                "name": "BTW"
+            }
+        ]
 
 # Group Tasks
 #### Task status types
