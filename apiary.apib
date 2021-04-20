@@ -10,6 +10,16 @@ In case you have any feedback or miss a certain functionality, let us know via s
 - API Identity token URL : <code>login.adminpulse.be/connect/token</code>
 - API Identity authorize URL : <code>login.adminpulse.be/connect/authorize</code>
 
+###General
+####Errors
+Status codes
+- <code>200</code> OK
+- <code>400</code> Bad Request, the endpoint was called using invalid data
+- <code>401</code> Unauthorized, invalid or missing access token
+- <code>404</code> Resource not found, make sure the correct URL was used
+- <code>429</code> Too Many Requests
+- <code>500</code> Internal Server Error, make sure the correct access token was provided
+
 ### Authentication
 OAuth2 will be used to protect adminpulse endpoints.
 Before you can start using our endpoints, send a request to support@adminpulse.be to request a <code>client_id</code> and <code>client_secret</code>.
