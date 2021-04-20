@@ -4,7 +4,7 @@ HOST: https://api.adminpulse.be
 # AdminPulse API documentation
 
 This documentation describes the adminpulse api endpoints.
-In case you have any feedback or miss a certain functionality, let us know via adminpulse@syneton.be
+In case you have any feedback or miss a certain functionality, let us know via support@adminpulse.be
 
 - API Base URL : <code>api.adminpulse.be</code>
 - API Identity token URL : <code>login.adminpulse.be/connect/token</code>
@@ -12,15 +12,33 @@ In case you have any feedback or miss a certain functionality, let us know via a
 
 ### Authentication
 OAuth2 will be used to protect adminpulse endpoints.
-Before you can start using our endpoints, send a request to adminpulse@syneton.be to request a <code>client_id</code> and <code>client_secret</code>.
-Keep in mind that you will have to register a possible redirect URL as well. This will be the URL being called by our OAuth authentication.
+Before you can start using our endpoints, send a request to support@adminpulse.be to request a <code>client_id</code> and <code>client_secret</code>.
+
+####Option 1 - Using a website with callback url
+Keep in mind that you will have to register a <code>redirect URL</code> as well. This will be the URL being called by our OAuth authentication.
 
 <i>example</i> : https://yourcompany/adminpulse/callback
+
+####Option 1 - Using a client application (or service)
+In this case, no specific redirect or callback URL needs to be registered.
 
 ###Scopes
 <ul>
 <li>api.connect</li>
 </ul>
+
+###Changelog
+#### 2021 - March
+- It is now possible to add documents using the Documents endpoint
+
+#### 2021 - February
+- Mark a task completed, or change the task status based on task type and deadline
+- Add registrations 
+
+####Postman
+Check our postman collection to explore our API, check multiple examples and generate code based on your desired programming language.
+
+https://postman.adminpulse.be/
 
 # Group Relations
 #### CRM type
