@@ -420,6 +420,17 @@ Get a single relation with all linked relations.
 
 * Registration list (adminpulse registration xlsx) = 1000,
 
+#### Signing status
+* SigningEmpty = 1,
+* SigningNeeded = 2,
+* SigningRevoked = 3,
+* SigningExpired = 4,
+* SigningPending = 10,
+* SigningFailed = 11,
+* SigningRejected = 12,
+* SigningCompleted = 20,
+* SigningCompletedOriginal = 21,
+
 ## Add document [/documents/add]
 
 ### Add [POST]
@@ -436,6 +447,53 @@ Get a single relation with all linked relations.
         + relationIdentifier: `APR00001` (string) - Unique identifier of the relation
         + tagNames: `2020;PB` (string) - Seperated list of tags. Note : Tags will not be created when they don't exist.
 + Response 200 (application/json)
+
+## List documents [/documents?page={page}&pageSize={pageSize}&relationIdentifier={relationIdentifier}&createDateFrom={createDateFrom}&createDateUntil={createDateUntil}&documentDateFrom={documentDateFrom}&documentDateUntil={documentDateUntil}&documentType={documentType}&signingStatus={signingStatus}&tagNames={tagNames}]
+
+### GET [GET]
+List all documents, based on the given query parameters..
+
++ Parameters
+    + page (number, optional, `0`) ... When using paged request, pass in page number.
+    + pageSize (number, optional, `50`) ... Number of results to return per page.
+    + relationIdentifier (string, optional, `APR00001`) ... Unique identifier of the relation
+    + createDateFrom (string, optional, `30102010`) ... Documents created from
+    + createDateUntil (string, optional, `30102011`) ... Documents created until
+    + documentDateFrom (string, optional, `30102010`) ... Document date from (based on the content of the document, this could differ from the creation date)
+    + documentDateUntil (string, optional, `30102011`) ... Document date from (based on the content of the document, this could differ from the creation date)
+    + documentType (number, optional, `0`) ... The type of the document
+    + signingStatus (number, optional, `0`) ... The signingStatus of the document (Signature pending, signed, etc)
+    + tagNames (string, optional, `Permanent Dossier;PB`) ... ; delimited list of tags
++ Response 200 (application/json)
+
+        [
+            {
+            "results": [
+                {
+                    "id": "4f492334-fdab-eb11-89ee-00155d0ee999",
+                    "name": "AdminPulse-sample.docx",
+                    "documentDate": "2021-05-03T10:49:16.962Z",
+                    "documentType": 13,
+                    "createDate": "2021-05-03T10:49:16.9620547Z",
+                    "updateDate": "2021-05-03T11:02:23.1802061Z",
+                    "signingStatus": 1,
+                    "documentUrl": "https://dev-storage.adminpulse.be/db9f4bac-4246-4c9d-98de-99/other-documents/4f492334-fdab-eb11-89ee-00155d0eeb6e?sv=2018-03-28&sr=b&sig=01Tn1U3l9Vt47iItfY5pPhNaFsCZfND7%2BaGG1TPUp2c%3D&se=2021-09-22T08%3A25%3A59Z&sp=r&rsct=application%2Fvnd.openxmlformats-officedocument.wordprocessingml.document&rscd=attachment%3B filename%3D\"DO%2520NOT%2520DELETE%2520-%2520AdminPulse-invoice-template-fields%2520%2810%29.docx\"",
+                    "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "tags": [
+                        {
+                            "name": "Permanent Dossier"
+                        }
+                    ],
+                    "relationIdentifiers": [
+                        "APR00575"
+                    ]
+                ],
+            "currentPage": 0,
+            "pageCount": 2,
+            "pageSize": 5,
+            "totalRowCount": 7
+            }
+        ]
 
 ## Get tags [/documents/tags]
 
@@ -475,5 +533,25 @@ Get a single relation with all linked relations.
         + inapplicable (boolean)
         + isBlocked (boolean)
         + status: `2` (number)
+
++ Response 200 (application/json)
+
+# Group Interactions
+#### Interaction types
+* Note = 0,
+* Telephone = 1,
+* Appointment = 3
+
+## Add interaction [/interactions/add]
+
+### Add interaction [POST]
+
++ Request (application/json)
+    + Attributes
+        + title: `This is a sample interaction title` (string, required)
+        + description: `This is a sample description` (string)
+        + relationIdentifier: `APR00001` (string)
+        + interactiontype: `0` (number)
+        + deadline: `30122020` (string, required) - Date format as ddMMyyyy
 
 + Response 200 (application/json)
