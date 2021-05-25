@@ -43,6 +43,15 @@ Call (post) the token endpoint to get access and refreshtokens
 - username=***
 - password=***
 
+###Scopes
+
+To get a refresh token, you must request the offline_access scope. A refresh token allows you to refresh your access token and maintain an offline connection.
+
+<ul>
+<li>api.connect</li>
+<li>offline_access (optional)</li>
+</ul>
+
 ###Rate limiting
 Your calls are rate limited by a combination of your unique client_id and the tenant you're making calls for (with a fallback value of the caller's IP Address).
 
@@ -52,12 +61,12 @@ The amount of calls remaining can be checked by looking at these response header
 
 Please note: the minute referred to above is a sliding window (defaults to 600/min).
 
-###Scopes
-<ul>
-<li>api.connect</li>
-</ul>
-
 ###Changelog
+#### 2021 - May
+- Adding interactions is now possible
+- Query documents (based on the portal flag)
+- Query relations based on a searchvalue (name, telephone, vat number, etc)
+
 #### 2021 - March
 - It is now possible to add documents using the Documents endpoint
 
