@@ -451,7 +451,8 @@ Get a single relation with all linked relations.
 ## List documents [/documents?page={page}&pageSize={pageSize}&relationIdentifier={relationIdentifier}&createDateFrom={createDateFrom}&createDateUntil={createDateUntil}&documentDateFrom={documentDateFrom}&documentDateUntil={documentDateUntil}&documentType={documentType}&signingStatus={signingStatus}&tagNames={tagNames}]
 
 ### GET [GET]
-List all documents, based on the given query parameters..
+List all documents, based on the given query parameters.
+By default, documents will not be public on our API. Make sure they are marked as "Public to API" by the user. More information can be found here : https://syneton.zendesk.com/hc/articles/360021907360
 
 + Parameters
     + page (number, optional, `0`) ... When using paged request, pass in page number.
