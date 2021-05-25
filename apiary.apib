@@ -17,7 +17,7 @@ Status codes
 - <code>400</code> Bad Request, the endpoint was called using invalid data
 - <code>401</code> Unauthorized, invalid or missing access token
 - <code>404</code> Resource not found, make sure the correct URL was used
-- <code>429</code> Too Many Requests
+- <code>429</code> Too Many Requests, you're allowed to make 600 calls per minute.
 - <code>500</code> Internal Server Error, make sure the correct access token was provided
 
 ### Authentication
@@ -42,6 +42,15 @@ Call (post) the token endpoint to get access and refreshtokens
 - grant_type=password
 - username=***
 - password=***
+
+###Rate limiting
+Your calls are rate limited by a combination of your unique client_id and the tenant you're making calls for (with a fallback value of the caller's IP Address).
+
+The amount of calls remaining can be checked by looking at these response headers of each request:
+- **x-remaining-calls-per-minute**: The amount of calls you can still make.
+- **x-total-calls-per-minute**: The total amount of calls you can make per minute.
+
+Please note: the minute referred to above is a sliding window.
 
 ###Scopes
 <ul>
