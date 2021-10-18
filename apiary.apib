@@ -22,7 +22,7 @@ Status codes
 
 ### Authentication
 OAuth2 will be used to protect adminpulse endpoints.
-Before you can start using our endpoints, send a request to support@adminpulse.be to request a <code>client_id</code> and <code>client_secret</code>.
+Before you can start using our endpoints, send a request to support@adminpulse.be to request a <code>client_id</code> and <code>client_secret</code> or Personal Access Token.
 
 ####Option 1 - Using a website with callback url
 Keep in mind that you will have to register a <code>redirect URL</code> as well. This will be the URL being called by our OAuth authentication.
@@ -42,6 +42,10 @@ Call (post) the token endpoint to get access and refreshtokens
 - grant_type=password
 - username=***
 - password=***
+
+####Option 3 - Using a Personal Access Token
+In this case, a token will be given to you by the AdminPulse team. This token does not need to be refreshed, after being given the token, you can use it in the following header:
+<code>Authorization: Bearer {PAT}</code>
 
 ###Scopes
 
