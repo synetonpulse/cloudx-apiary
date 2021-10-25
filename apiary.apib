@@ -31,8 +31,9 @@ Keep in mind that you will have to register a <code>redirect URL</code> as well.
 
 Call the authorize endpoint using the specific parameters
 
-<code>https://login.adminpulse.be/connect/authorize?client_id=***&response_type=code&scope=api.connect offline_access&redirect_uri=https://***/callback</code>
+<code>https://login.adminpulse.be/connect/authorize?client_id=***&response_type=code&scope=api.connect%20offline_access&redirect_uri=https://***/callback</code>
 
+_Note : keep in mind that scopes need to be space delimited (using the %20 encoding)_
 
 ####Option 2 - Using a client application (or service)
 In this case, no specific redirect or callback URL needs to be registered.
@@ -66,6 +67,10 @@ The amount of calls remaining can be checked by looking at these response header
 Please note: the minute referred to above is a sliding window (defaults to 600/min).
 
 ###Changelog
+#### 2021 - October
+- Use the **pricelistitems** API to fetch all available pricelist item options and codes. This will allow you to easily create new registrations with the correct codes. 
+- api.adminpulse.be/**registrations/pricelistitems**
+
 #### 2021 - May
 - Adding interactions is now possible
 - Query documents (based on the portal flag)
