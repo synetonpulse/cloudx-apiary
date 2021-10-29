@@ -241,6 +241,12 @@ https://postman.adminpulse.be/
 * Formula = 2,      // Use formula
 * FreeDate = 3,     // A user has to fill in the date manually each year
 
+#### Financial Statement Schema
+* Reduced = 0,  // Verkort
+* Full = 1,     // Volledig
+* Micro = 2,    // Micro
+* NotApplicable = 3,    // Niet van toepassing
+
 #### Risk level (anti money laundering)
 * Low = 0,
 * Standard = 1,
@@ -344,6 +350,7 @@ Get a single relation with all linked relations.
             "generalMeetingFormulaMonth": 2,
             "generalMeetingFormulaType": 2,
             "generalMeetingFormulaFallback": 0,
+            "financialStatementSchema": 2,
             "assistant": "Bart De Keersmaeker",
             "assistantEmail": "bart.dekeersmaeker@syneton.be",
             "assistantBackup": "Relation",
