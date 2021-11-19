@@ -17,7 +17,7 @@ Status codes
 - <code>400</code> Bad Request, the endpoint was called using invalid data
 - <code>401</code> Unauthorized, invalid or missing access token
 - <code>404</code> Resource not found, make sure the correct URL was used
-- <code>429</code> Too Many Requests, you're allowed to make 600 calls per minute.
+- <code>429</code> Too Many Requests, you're allowed to make 300 calls per minute.
 - <code>500</code> Internal Server Error, make sure the correct access token was provided
 
 ### Authentication
@@ -503,48 +503,102 @@ Add a new registration for given user.
 
 # Group Documents
 #### Document types
-* Unknown = -1,
-* CODA = 3,
-* Eid = 10,
-* Other = 13,
-* VatReceiptBelgium = 16,
-* UBOLetter = 17,
-* AuthorizationList = 19,
-* FgovIntracom = 20,
-* FgovCitReceipt (Corporate income tax, vennootschapsbelasting ontvangstbewijs) = 22 
-* Klantenlisting / BTW listing = 28 ,
-* Jaarrekening betaalbevestiging = 30,
-* Jaarrekening = 31,
-* Jaarrekening betaalverzoek = 35,
-* FodPersonalIncomeTaxExcelReceipt = 33, 
-* FodPersonalIncomeTaxExcelMandatesDeclarationStatus = 34,
+* Unknown = -1
+* CODA = 3
+* Eid = 10
+* Other = 13
+* BTW - Ontvangstbewijs = 16
+* BTW - Rekeninguittreksel = 44
+* BTW - 604A - Aanvraag identificatie = 55
+* BTW - 604B - Identificatie wijziging = 51
+* BTW - 604C - Stopzetting = 56
+
+* UBO - PDF uit register = 17
+* AuthorizationList = 19
+* Intracom ontvangstbewijs = 20
+* Klantenlisting / BTW listing = 28 
+
+* Jaarrekening betaalbevestiging = 30
+* Jaarrekening = 31
+* Jaarrekening betaalverzoek = 35
+* Jaarrekening - Intern = 53
+
+* FodPersonalIncomeTaxExcelReceipt = 33
+* FodPersonalIncomeTaxExcelMandatesDeclarationStatus = 34
 * KBO uittreksel = 36
-* PB - Tax On Web PDF = 21,
-* PB - Aanslagbiljet = 37,
-* PB - Voorbereiding van de aangifte in de personenbelasting = 38,
-* PB - Voorstel van vereenvoudigde aangifte = 39,
-* FOD - Inkomsten van buitenlandse oorsprong = 40,
-* Contract - Rental agreement / Huurovereenkomst = 5000,
-* Contract - Description of the location / Plaatsbeschrijving = 5001,
+* Rechtspersonenbelasting (aangifte) = 47
+* Bedrijfsvoorheffing - Betalingsinstructies = 48
 
-* Fiche 274 = 27400,
-* Fiche 281.10 - Lonen = 28110,
-* Fiche 281.11 - Pensioenfiche = 28111,
-* Fiche 281.11 - Pensioenfiche - Betalingsfiche (PDOS) = 281110,
-* Fiche 281.13 - Werkloosheidsuitkeringen = 28113,
-* Fiche 281.15 - Inkomsten uit pensioensparen = 28115,
-* Fiche 281.18 - Vervangingsinkomen = 28118,
-* Fiche 281.20 - Bezoldigingen van bedrijfsleiders = 28120,
-* Fiche 281.50 - Commissies, makelaarslonen, handelsrestorno’s, vacatiegelden, betalingen en andere voordelen alle aard = 28150,
-* Fiche 281.61 - Leningen = 28161,
-* Fiche 281.62 - Levensverzekering = 28162,
-* Fiche 281.71 - Liveraliteiten - Giften in geld = 28171,
-* Fiche 281.81 - Dienstencheques = 28181,
-* Fiche 281.90 - Teruggave sociale bijdrage = 28190,
+* Afschrijvingstabel = 49
+* Lening - Aflossingstabel = 58
+* Akte onroerende goederen = 59
+* Verslag - Algemene vergadering = 50
+* Verslag - Van het bestuursorgaan = 52
+* Oprichtingsakte = 54
+* Financieel plan = 57
 
-* 273 = 2730,
-* 273A = 2734,
-* 273S = 2735,
+* Contract - Huurovereenkomst = 5000
+* Contract - Plaatsbeschrijving = 5001
+* Contract - Lening = 5002
+
+* PB - Tax On Web PDF = 21
+* PB - Aanslagbiljet = 37
+* PB - Voorbereiding van de aangifte in de personenbelasting = 38
+* PB - Voorstel van vereenvoudigde aangifte = 39
+* PB - Ontvangsbewijs - niet inwoner (PDF) = 43
+* PB - Berekening = 46
+
+* FOD - Vennootschapsbelasting ontvangstbewijs = 22 
+* FOD - Inkomsten van buitenlandse oorsprong = 40
+* FOD - Vennootschapsbelasting aangifte= 41
+* FOD - Vennootschapsbelasting teruggave = 42
+
+* eStox - PDF overzicht = 45
+
+* Contract - Rental agreement / Huurovereenkomst = 5000
+* Contract - Description of the location / Plaatsbeschrijving = 5001
+
+* Fiche 274 = 27400
+* Fiche 281.10 - Lonen = 28110
+* Fiche 281.11 - Pensioenfiche = 28111
+* Fiche 281.11 - Pensioenfiche - Betalingsfiche (PDOS) = 281110
+* Fiche 281.12 - Vervangingsinkomsten
+* Fiche 281.13 - Werkloosheidsuitkeringen = 28113
+* Fiche 281.15 - Inkomsten uit pensioensparen = 28115
+* Fiche 281.16 - Vergoedingen wegens blijvende ongeschiktheid = 28116
+* Fiche 281.17 -  Brugpensioenen = 28117
+* Fiche 281.18 - Vervangingsinkomen = 28118
+* Fiche 281.20 - Bezoldigingen van bedrijfsleiders = 28120
+* Fiche 281.30 - Subsidies, onderhoudsuitkeringen = 28130
+* Fiche 281.40 - Lijfrenten en tijdelijke renten = 28140
+* Fiche 281.45 - Auteursrechten = 28145
+* Fiche 281.50 - Commissies, makelaarslonen, handelsrestorno’s, vacatiegelden, betalingen en andere voordelen alle aard = 28150
+* Fiche 281.61 - Leningen = 28161
+* Fiche 281.62 - Levensverzekering = 28162
+* Fiche 281.63 - Rechtsbijstandsverzekering = 28163
+* Fiche 281.71 - Liveraliteiten - Giften in geld = 28171
+* Fiche 281.80 - PWA-cheques = 28180
+* Fiche 281.81 - Dienstencheques = 28181
+* Fiche 281.85 - Fonds vermindering van de totale energiekosten = 28185
+* Fiche 281.90 - Teruggave sociale bijdrage = 28190
+* Fiche 281.91 - Verkoop en aankoop onroerend goed = 28191
+* Fiche 281.92 - Landbouwbeleid = 28192
+* Fiche 281.93 - Inlichtingen openbare diensten = 28193
+* Fiche 281.99 = 28199
+
+* 273 = 2730
+* 273A = 2734
+* 273S = 2735
+
+* MOSS = 62
+* OSS - Ontvangstbewijs = 63
+* OSS - Registratie = 67
+* OSS - Aanvraag = 68
+* OSS - Status vd ontvangen betalingen = 69
+
+* NBB - Buitenlandse rekeningen = 70
+
+* Belgisch staatsblad - Bijlage = 71
 
 * Registration list (adminpulse registration xlsx) = 1000,
 
