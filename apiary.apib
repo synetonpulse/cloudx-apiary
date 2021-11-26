@@ -67,6 +67,11 @@ The amount of calls remaining can be checked by looking at these response header
 Please note: the minute referred to above is a sliding window (defaults to 300/min).
 
 ###Changelog
+
+#### 2021 - November
+- https://api.adminpulse.be/users/me was added to retrieve currently logged in username
+- New document types were added to support sync with MinFin documents.
+
 #### 2021 - October
 - Use the **pricelistitems** API to fetch all available pricelist item options and codes. This will allow you to easily create new registrations with the correct codes. 
 - api.adminpulse.be/**registrations/pricelistitems**
@@ -78,10 +83,6 @@ Please note: the minute referred to above is a sliding window (defaults to 300/m
 
 #### 2021 - March
 - It is now possible to add documents using the Documents endpoint
-
-#### 2021 - February
-- Mark a task completed, or change the task status based on task type and deadline
-- Add registrations 
 
 ####Postman
 Check our postman collection to explore our API, check multiple examples and generate code based on your desired programming language.
@@ -729,7 +730,7 @@ More information can be found here : https://syneton.zendesk.com/hc/articles/360
 
 ## Add interaction [/interactions/add]
 
-### Add interaction [POST]
+### Add [POST]
 
 + Request (application/json)
     + Attributes
@@ -740,3 +741,20 @@ More information can be found here : https://syneton.zendesk.com/hc/articles/360
         + deadline: `30122020` (string, required) - Date format as ddMMyyyy
 
 + Response 200 (application/json)
+
+# Group Users
+
+## Me [/users/me]
+
+### Me [GET]
+
+* Return information about the currently logged in user
+* E-mail is equal to the username within the AdminPulse environment
+
++ Response 200 (application/json)
+
+        {
+            "firstName": "John",
+            "lastName": "Doe",
+            "email": "johnd@gmail.com"
+        }
