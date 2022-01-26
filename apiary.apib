@@ -261,7 +261,7 @@ A relation will be <code>Partner</code> (defined as From), whereas the other sid
 ## List all relations [/relations?page={page}&pageSize={pageSize}&lastSyncTime={lastSyncTime}&searchCriteria={searchCriteria}]
 
 ### GET [GET]
-List all relations with linked relations included.
+List all relations with linked relations included (see single relation for all properties available)
 
 + Parameters
     + page (number, optional, `0`) ... When using paged request, pass in page number.
@@ -362,6 +362,8 @@ Get a single relation with all linked relations.
             "responsible": "Cindy",
             "responsibleEmail": "cindy@invalid.com",
             "remark": "Small remark",
+            "idCardNumber": "12345678901",
+            "idCardNumberExpiryDate": "2021-12-31T00:00:00",
             "tags": [
                 "connect",
                 "postman"
