@@ -68,6 +68,13 @@ Please note: the minute referred to above is a sliding window (defaults to 300/m
 
 ###Changelog
 
+#### 2022 - January 
+- It is now possible to create relations using 
+- api.adminpulse.be/relations/**person/add**
+- api.adminpulse.be/relations/**company/add**
+- api.adminpulse.be/relations/**soleproprietor/add**
+
+
 #### 2021 - November
 - https://api.adminpulse.be/users/me was added to retrieve currently logged in username
 - New document types were added to support sync with MinFin documents.
@@ -416,6 +423,89 @@ Get a single relation with all linked relations.
             }
         ]
         
+## Add relation company [/relations/company/add]
+
+### POST [POST]
+Create a relation of type Company.
+
++ Request (application/json)
+    + Attributes
+        + enterpriseNumber: `0728.606.123` (string, required)
+        + name: `Enterprise name`  (string, required)
+        + country: `BE`  (string, required) - 2 letter country code
+        + crmType: `2` (number, required)
+        + language: `NL`  (string) - 2 letter language code
+        + website: `http://www.adminpulse.be`  (string)
+        + telephone: `+3237558888`  (string)
+        + mobile: `+32499999999`  (string)
+        + email: `info@adminpulse.be`  (string)
+        + remark: `Sample remark`  (string)
+
++ Response 200 (application/json)
+
+        [
+            {
+            "uniqueIdentifier": "APR00084"
+            }
+        ]
+        
+## Add relation soleproprietor [/relations/soleproprietor/add]
+
+### POST [POST]
+Create a relation of type Soleproprietor.
+
++ Request (application/json)
+    + Attributes
+        + enterpriseNumber: `0728.606.123` (string, required)
+        + name: `De Smet`  (string, required)
+        + firstName: `Cindy`  (string, required)
+        + country: `BE`  (string, required) - 2 letter country code
+        + crmType: `2` (number, required)
+        + nationalNumber: `84032002333` (string)
+        + birthDate: `200384` (string) - ddMMyyyy
+        + language: `NL`  (string) - 2 letter language code
+        + website: `http://www.adminpulse.be`  (string)
+        + telephone: `+3237558888`  (string)
+        + mobile: `+32499999999`  (string)
+        + email: `info@adminpulse.be`  (string)
+        + remark: `Sample remark`  (string)
+
++ Response 200 (application/json)
+
+        [
+            {
+            "uniqueIdentifier": "APR00099"
+            }
+        ]        
+        
+## Add relation person [/relations/person/add]
+
+### POST [POST]
+Create a relation of type Soleproprietor.
+
++ Request (application/json)
+    + Attributes
+        + name: `De Smet`  (string, required)
+        + firstName: `Cindy`  (string, required)
+        + country: `BE`  (string, required) - 2 letter country code
+        + crmType: `2` (number, required)
+        + nationalNumber: `84032002333` (string)
+        + birthDate: `200384` (string) - ddMMyyyy
+        + language: `NL`  (string) - 2 letter language code
+        + website: `http://www.adminpulse.be`  (string)
+        + telephone: `+3237558888`  (string)
+        + mobile: `+32499999999`  (string)
+        + email: `info@adminpulse.be`  (string)
+        + remark: `Sample remark`  (string)
+
++ Response 200 (application/json)
+
+        [
+            {
+            "uniqueIdentifier": "APR00099"
+            }
+        ]        
+                
 # Group Registrations
 #### Resource type
 * Work = 0,
