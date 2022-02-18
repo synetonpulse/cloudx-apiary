@@ -490,9 +490,9 @@ Get a single relation with all linked relations.
             ]
         }
         
-## Add relation company [/relations/company/add]
+## Add relation  [/relations]
 
-### POST [POST]
+### POST Company [POST /relations/company/add]
 Create a relation of type Company.
 
 + Request (application/json)
@@ -515,10 +515,8 @@ Create a relation of type Company.
             "uniqueIdentifier": "APR00084"
             }
         ]
-        
-## Add relation soleproprietor [/relations/soleproprietor/add]
 
-### POST [POST]
+### POST Soleproprietor [POST /relations/soleproprietor/add]
 Create a relation of type Soleproprietor.
 
 + Request (application/json)
@@ -545,9 +543,7 @@ Create a relation of type Soleproprietor.
             }
         ]        
         
-## Add relation person [/relations/person/add]
-
-### POST [POST]
+### POST Person [POST /relations/person/add]
 Create a relation of type natural person.
 
 + Request (application/json)
@@ -571,8 +567,22 @@ Create a relation of type natural person.
             {
             "uniqueIdentifier": "APR00099"
             }
-        ]        
-                
+        ]    
+        
+### POST eid [POST /relations/eid]
+Update a given relation with an eid file (can be XML or PDF document)
+
++ Request (form-data)
+    + Attributes
+        + file (object, required) - form-data File
+        + fileName  (string, required)
+        + usedocumentrecognition (boolean, required)
+        + nationalnumber  (string)
+        + firstname  (string)
+        + lastname  (string)
+        
++ Response 200 (application/json)
+
 # Group Registrations
 #### Resource type
 * Work = 0,
@@ -841,9 +851,9 @@ More information can be found here : https://syneton.zendesk.com/hc/articles/360
             }
         ]
 
-## List tags [/documents/tags]
+## List tags & folders [/documents/tags]
 
-### Tags [GET]
+### Tags [GET /documents/tags]
 * Multiple tags can be assigned when adding a document.
 * This method will return all available tags.
 
@@ -861,6 +871,60 @@ More information can be found here : https://syneton.zendesk.com/hc/articles/360
             }
         ]
 
+### Folders [GET /documents/folders]
++ Response 200 (application/json)
+
+        [
+            {
+                "name": "Team",
+                "tagId": "364a426f-0509-4199-ae27-9349c0217f9b",
+                "children": [
+                    {
+                        "name": "Waasland",
+                        "tagId": "71fda83f-8aef-4b29-884d-e20a2c37ff73",
+                        "children": [],
+                        "tagIds": [
+                            "364a426f-0509-4199-ae27-9349c0217f9b",
+                            "71fda83f-8aef-4b29-884d-e20a2c37ff73"
+                        ],
+                        "treeTagNames": "Team\\Waasland\\"
+                    },
+                    {
+                        "name": "NoAccess",
+                        "tagId": "184afd39-7313-eb11-8441-0003ff20453f",
+                        "children": [],
+                        "tagIds": [
+                            "364a426f-0509-4199-ae27-9349c0217f9b",
+                            "184afd39-7313-eb11-8441-0003ff20453f"
+                        ],
+                        "treeTagNames": "Team\\NoAccess\\"
+                    }
+                ],
+                "tagIds": [
+                    "364a426f-0509-4199-ae27-9349c0217f9b"
+                ],
+                "treeTagNames": "Team\\"
+            },
+            {
+                "name": "Jaarrekening",
+                "tagId": "0dae4054-a6bc-427d-a1b7-40c08a125c35",
+                "children": [],
+                "tagIds": [
+                    "0dae4054-a6bc-427d-a1b7-40c08a125c35"
+                ],
+                "treeTagNames": "Jaarrekening\\"
+            },
+            {
+                "name": "BTW",
+                "tagId": "9f83bcdc-6ab6-4b75-96fb-f3b45c339f68",
+                "children": [],
+                "tagIds": [
+                    "9f83bcdc-6ab6-4b75-96fb-f3b45c339f68"
+                ],
+                "treeTagNames": "BTW\\"
+            }
+        ]
+        
 # Group Tasks
 #### Task status types
 * ToDo = 0,
