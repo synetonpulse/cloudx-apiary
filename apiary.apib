@@ -605,16 +605,57 @@ List all pricelist items.
 
         [
             {
+                "id": "630de493-6e79-43ba-8d89-f3991494a9e7"
                 "name": "Administration",
                 "code": "ADMIN",
                 "type": 0
             },
             {
+                "id": "630de493-6e79-43ba-8d89-f3991494a9e6"
                 "name": "Software costs",
                 "code": "SC",
                 "type": 1
             }
         ]
+        
+## Tree of pricelist items [/registrations/pricelistitems/tree]
+
+### GET [GET]
+List all pricelist items as a tree (with main and subitems)
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": "630de493-6e79-43ba-8d89-f3991494a9e7",
+                "code": "A200",
+                "name": "Holiday",
+                "type": 3,
+                "billable": false,
+                "items": [
+                    {
+                        "id": "35aa9aba-916d-4894-b57a-375b887ff7d5",
+                        "name": "Illness",
+                        "type": 3,
+                        "billable": false
+                    },
+                    {
+                        "id": "98737a80-80b2-4597-95e2-3f66d11aa0b2",
+                        "name": "Short holiday",
+                        "type": 3,
+                        "billable": false
+                    }
+                ]
+            },
+            {
+                "id": "d369e4a4-8fdf-4c92-a259-a0928e36295a",
+                "code": "100",
+                "name": "Work",
+                "type": 0,
+                "billable": true,
+                "items": []
+            }
+        ]        
 
 ## Add registration [/registrations/add]
 Add a new registration for given user.
@@ -627,9 +668,11 @@ Add a new registration for given user.
         + registrationDate: `2015-12-30` (required, string) - Date format as yyyy-mm-dd
         + relationIdentifier: `APR00001` (string, required) - Unique identifier of the relation
         + userIdentifier (string, required) - Email address of the employee
-        + resourceIdentifier (string, required) - Pricelist item code
+        + resourceIdentifier (string, required) - Pricelist item code or pricelist item ID
         + timeFrom: `11:00` (string, required)
         + timeTo: `12:00` (string, required)
+        + billable (boolean) - Is this registration billable (invoicable)
+        + inFixedAmount (boolean) - Is this registration included in the forfait/fixed amount/subscription
         + remarkInternal  (string)
         + remarkInvoice  (string)
 
