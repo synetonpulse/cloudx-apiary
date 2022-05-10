@@ -67,6 +67,8 @@ The amount of calls remaining can be checked by looking at these response header
 Please note: the minute referred to above is a sliding window (defaults to 60/min).
 
 ###Changelog
+#### 2022 - march
+- It is now possible to filter relations based on the relation type (company, person, etc)
 
 #### 2022 - february
 - Get DMS folders (tree view)
@@ -81,21 +83,6 @@ Please note: the minute referred to above is a sliding window (defaults to 60/mi
 - api.adminpulse.be/relations/**company/add**
 - api.adminpulse.be/relations/**soleproprietor/add**
 
-#### 2021 - November
-- api.adminpulse.be/**users/me** was added to retrieve currently logged in username
-- New document types were added to support sync with MinFin documents.
-
-#### 2021 - October
-- Use the **pricelistitems** API to fetch all available pricelist item options and codes. This will allow you to easily create new registrations with the correct codes. 
-- api.adminpulse.be/**registrations/pricelistitems**
-
-#### 2021 - May
-- Adding interactions is now possible
-- Query documents (based on the portal flag)
-- Query relations based on a searchvalue (name, telephone, vat number, etc)
-
-#### 2021 - March
-- It is now possible to add documents using the Documents endpoint
 
 ####Postman
 Check our postman collection to explore our API, check multiple examples and generate code based on your desired programming language.
@@ -290,7 +277,7 @@ https://postman.adminpulse.be/
 A relation link will be available in both directions. 
 A relation will be <code>Partner</code> (defined as From), whereas the other side of the relation will be described as <code>Partner Of</code> (defined as To)
 
-## List relations [/relations?page={page}&pageSize={pageSize}&lastSyncTime={lastSyncTime}&searchCriteria={searchCriteria}]
+## List relations [/relations?page={page}&pageSize={pageSize}&lastSyncTime={lastSyncTime}&searchCriteria={searchCriteria}&crmType={crmType}&type={type}]
 
 ### GET [GET]
 List all relations with linked relations included (see single relation for all properties available)
@@ -300,7 +287,8 @@ List all relations with linked relations included (see single relation for all p
     + pageSize (number, optional, `50`) ... Number of results to return per page.
     + lastSyncTime (string, optional, `10102010`) ... Get changes newer than the given last sync time. This will allow partial updates. Format ddMMyyyy`)
     + searchCriteria (string, optional, `3237555555`) ... Search by name, telephone number or VAT number
-    
+    + crmType (number, optional) ... Select relations of the given crmtype (customer, prospect, etc) only
+    + type (number, optional) ... Select relations of the given type (company, natural peroson, etc) only
 + Response 200 (application/json)
 
         [
