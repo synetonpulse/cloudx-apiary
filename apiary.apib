@@ -277,7 +277,7 @@ https://postman.adminpulse.be/
 A relation link will be available in both directions. 
 A relation will be <code>Partner</code> (defined as From), whereas the other side of the relation will be described as <code>Partner Of</code> (defined as To)
 
-## List relations [/relations?page={page}&pageSize={pageSize}&lastSyncTime={lastSyncTime}&searchCriteria={searchCriteria}&crmType={crmType}&type={type}]
+## List relations [/relations?page={page}&pageSize={pageSize}&lastSyncTime={lastSyncTime}&searchCriteria={searchCriteria}&crmType={crmType}&type={type}&includeInactive={includeInactive}]
 
 ### GET [GET]
 List all relations with linked relations included (see single relation for all properties available)
@@ -289,6 +289,7 @@ List all relations with linked relations included (see single relation for all p
     + searchCriteria (string, optional, `3237555555`) ... Search by name, telephone number or VAT number
     + crmType (number, optional) ... Select relations of the given crmtype (customer, prospect, etc) only
     + type (number, optional) ... Select relations of the given type (company, natural peroson, etc) only
+    + includeInactive: `true | false` (string, optional) - Relations that have an end date in the past, will be filtered out from the result by default. This parameter can be configured to include the inactive relations.
 + Response 200 (application/json)
 
         [
