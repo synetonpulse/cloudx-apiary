@@ -976,11 +976,12 @@ More information can be found here : https://syneton.zendesk.com/hc/articles/360
 * Condition = 2
 * AutomaticMail = 3
 
-## List tasktemplates [/tasks/templates]
+## List tasktemplates [/tasks/templates?languageCode={languageCode}]
 ### List tasktemplates [GET]
 A task can be based upon a task template. Each main task, can have multiple subtasks.
 + Request (application/json)
-
+    + Attributes
+        + languageCode: `nl | fr | en` (string, optional) - If no languageCode was passed, the languageCode of the user will be used.
 + Response 200 (application/json)
 
         [
