@@ -67,6 +67,12 @@ The amount of calls remaining can be checked by looking at these response header
 Please note: the minute referred to above is a sliding window (defaults to 60/min).
 
 ###Changelog
+#### 2022 - september
+- Relation tags (add / remove)
+- Relation activate / deactivate
+- Relation update
+- Relation add address
+
 #### 2022 - march
 - It is now possible to filter relations based on the relation type (company, person, etc)
 
@@ -576,6 +582,59 @@ Update a given relation with an eid file (can be XML or PDF document)
         + firstname  (string)
         + lastname  (string)
         
++ Response 200 (application/json)
+
+### Deactivate relation [PUT /relations/{uniqueIdentifier}/deactivate]
+
++ Response 200 (application/json)
+
+### Activate relation [PUT /relations/{uniqueIdentifier}/activate]
+
++ Response 200 (application/json)
+
+## Update relation  [/relations/update]
+
+### Update [PUT /relations/{uniqueIdentifier}]
+Update a given relation.
+
++ Request (application/json)
+    + Attributes
+        + name: `Syneton`  (string)
+        + commercialname: `XYZ`  (string)
+        + website: `http://www.syneton.be`  (string)
+        + phone: `+3237555555`  (string)
+        + mobile: `+324799999`  (string)
+        + email: `info@syneton.be`  (string)
+        
++ Response 200 (application/json)
+
+## Update relation address [/relations/address]
+
+### Update [POST /relations/{uniqueIdentifier}/addresses]
+Add an address to the given relation relation.
+
++ Request (application/json)
+    + Attributes
+        + street: `Sample street`  (string, required)
+        + nr: `10`  (string, required)
+        + box: ``  (string)
+        + zip: `9100`  (string)
+        + city: `Sint-Niklaas`  (string)
+        + country: `BE`  (string)
+        + isMain: `true`  (boolean)
+        
++ Response 200 (application/json)
+
+## Update relation tags  [/relations/{uniqueIdentifier}/tags]
+
+### Add tag [POST /relations/{uniqueIdentifier}/tags/tagname]
+Add a tag to a given relation.
+
++ Response 200 (application/json)
+
+### Delete tag [DELETE /relations/{uniqueIdentifier}/tags/tagname]
+Delete a tag from a given relation.
+
 + Response 200 (application/json)
 
 # Group Registrations
