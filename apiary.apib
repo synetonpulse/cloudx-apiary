@@ -26,6 +26,8 @@ The AdminPulse API offers 3 authentication methods:
 - OAuth using username/password (in case no callback URL is supported by the client app)
 - Using an API key
 
+Whichever authentication method is used, the token or key always has to be added to the <code>Authorization</code> header with a <code>Bearer</code> prefix to access all API endpoints. Example: <code>Authentication: Bearer xyz</code>
+
 Before you can start using our endpoints, send a request to support@adminpulse.be to request a <code>client_id</code> and <code>client_secret</code> or a personal access token.
 
 ####OAuth with callback URL
@@ -169,15 +171,15 @@ https://postman.adminpulse.be/
 * 8 = Control by other means (controle door andere middelen)
 
 #### Company owner position
-* CEO = 0,
-* Manager = 1,
-* Director = 2,
-* Administrator = 3,
-* ExecutiveManager = 4,
-* Associate = 5,
-* ManagingDirector = 6,
-* DailyManagementNonProfit = 7,
-* ManagementNonProfit = 8,
+* CEO = 0
+* Manager = 1
+* Director = 2
+* Administrator = 3
+* ExecutiveManager = 4
+* Associate = 5
+* ManagingDirector = 6
+* DailyManagementNonProfit = 7
+* ManagementNonProfit = 8
 * Liquidator = 9
 
 #### Property rights (aandelen eigendomsrechten)
@@ -213,128 +215,132 @@ https://postman.adminpulse.be/
 * 23 = ExactProacc
 
 ####Social Secretariat
-* Other = 1,
-* Attentia = 2,
-* Securex = 3,
-* Acerta = 4,
-* Partena = 5,
-* Alia = 6,
-* Sodalis = 7,
-* Randstad = 8,
-* SDWorx = 9,
-* Sofidi = 10,
-* Accuria = 11,
-* Caritas = 12,
-* Sodiwe = 13,
-* Xerius = 14,
-* Liantis = 15,
-* Incozina = 16,
-* Salar = 17,
-* Sodibe = 18,
-* HDI = 19,
-* UCM = 20,
-* GroupS = 21,
-* NatPat = 22,
-* Unknown = 254,
+* Other = 1
+* Attentia = 2
+* Securex = 3
+* Acerta = 4
+* Partena = 5
+* Alia = 6
+* Sodalis = 7
+* Randstad = 8
+* SDWorx = 9
+* Sofidi = 10
+* Accuria = 11
+* Caritas = 12
+* Sodiwe = 13
+* Xerius = 14
+* Liantis = 15
+* Incozina = 16
+* Salar = 17
+* Sodibe = 18
+* HDI = 19
+* UCM = 20
+* GroupS = 21
+* NatPat = 22
+* Unknown = 254
 * None = 255
 
 ####Social Security Fund
-* Other = 1,
-* GroupS = 2,
-* Xerius = 3,
-* Liantis = 4,
-* Partena = 5,
-* Acerta = 6,
-* Securex = 7,
-* Incozina = 8,
-* Multipen = 9,
-* Entraide = 10,
-* Ucm = 11,
-* NationalFund = 12,
-* Nisse = 13, 
-* Unknown = 254,
+* Other = 1
+* GroupS = 2
+* Xerius = 3
+* Liantis = 4
+* Partena = 5
+* Acerta = 6
+* Securex = 7
+* Incozina = 8
+* Multipen = 9
+* Entraide = 10
+* Ucm = 11
+* NationalFund = 12
+* Nisse = 13
+* Unknown = 254
 * None = 255
 
 #### Vat periodicity
-* Unknown = 0,
-* Monthly = 1,
-* Quarterly = 2,
-* ExemptionSmallEnterprise = 3,
-* ExemptionAgriculture = 4,
-* Yearly = 5,
+* Unknown = 0
+* Monthly = 1
+* Quarterly = 2
+* ExemptionSmallEnterprise = 3
+* ExemptionAgriculture = 4
+* Yearly = 5
 * ExemptionArticle44 = 6
 
 #### General Meeting Formula Day
-* WorkDay = 0,
-* Monday = 1,
-* Tuesday = 2,
-* Wednesday = 3,
-* Thursday = 4,
-* Friday = 5,
-* Saturday = 6,
+* WorkDay = 0
+* Monday = 1
+* Tuesday = 2
+* Wednesday = 3
+* Thursday = 4
+* Friday = 5
+* Saturday = 6
 * Sunday = 7
 
 #### General Meeting Formula Week
-* First = 0,
-* Second = 1,
-* Third = 2,
-* Fourth = 3,
-* Penultimate = 4,
+* First = 0
+* Second = 1
+* Third = 2
+* Fourth = 3
+* Penultimate = 4
 * Last = 5
 
 #### General Meeting Formula Fallback
 * SameDay = 0,
-* NextWorkDay = 1,
-* PreviousWorkDay = 2,
-* NextMonday = 3,
-* NextTuesday = 4,
-* NextWednesday = 5,
-* NextThursday = 6,
-* NextFriday = 7,
-* NextSaturday = 8,
+* NextWorkDay = 1
+* PreviousWorkDay = 2
+* NextMonday = 3
+* NextTuesday = 4
+* NextWednesday = 5
+* NextThursday = 6
+* NextFriday = 7
+* NextSaturday = 8
 * NextSunday = 9
 
 #### General Meeting Type
-* None = 0,         // No general meeting
-* FixedDate = 1,    // Always on a fixed date (day/month)
-* Formula = 2,      // Use formula
-* FreeDate = 3,     // A user has to fill in the date manually each year
+* None = 0         (No general meeting)
+* FixedDate = 1    (Always on a fixed date (day/month))
+* Formula = 2      (Use formula)
+* FreeDate = 3     (A user has to fill in the date manually each year)
 
 #### Financial Statement Schema
-* Reduced = 0,  // Verkort
-* Full = 1,     // Volledig
-* Micro = 2,    // Micro
-* NotApplicable = 3,    // Niet van toepassing
+* Reduced = 0  
+* Full = 1  
+* Micro = 2
+* NotApplicable = 3
 
 #### Risk level (anti money laundering)
-* Low = 0,
-* Standard = 1,
-* High = 100,
+* Low = 0
+* Standard = 1
+* High = 100
 
 #### Communication medium
-* PhysicalAddress = 0,
-* Email = 1,
-* Phone = 2,
-* SocialMedia = 3,
-* Mobile = 4,
+* PhysicalAddress = 0
+* Email = 1
+* Phone = 2
+* SocialMedia = 3
+* Mobile = 4
 * PostBox = 5
 
 #### Communication purpose
-* Other = 0,
-* BillingAndReminder = 1, //For billing and reminder mails
+* Other = 0
+* BillingAndReminder = 1
 * TaskManagement = 2,
-* BillingOnly = 3 //Only for billing mails, no reminders
+* BillingOnly = 3
 
 #### Communication email type
-* To = 0,
-* Cc = 1,
+* To = 0
+* Cc = 1
 * Bcc = 2
+
+#### Payment method
+* Manual = 0
+* Direct debit = 1
 
 #### Relation link From | To
 A relation link will be available in both directions. 
 A relation will be <code>Partner</code> (defined as From), whereas the other side of the relation will be described as <code>Partner Of</code> (defined as To)
 
-## List relations [/relations?page={page}&pageSize={pageSize}&lastSyncTime={lastSyncTime}&searchCriteria={searchCriteria}&crmType={crmType}&type={type}&includeInactive={includeInactive}]
+## List relations [/relations?page={page}&pageSize={pageSize}&lastSyncTime={lastSyncTime}&searchCriteria={searchCriteria}&crmType={crmType}&type={type}&includeInactive={includeInactive}&withTags={withTags}&withoutTags={withoutTags}]
 
 ### GET [GET]
 List all relations with linked relations included (see single relation for all properties available)
@@ -347,6 +353,8 @@ List all relations with linked relations included (see single relation for all p
     + crmType (number, optional) ... Select relations of the given crmtype (customer, prospect, etc) only
     + type (number, optional) ... Select relations of the given type (company, natural peroson, etc) only
     + includeInactive: `true | false` (string, optional) - Relations that have an end date in the past, will be filtered out from the result by default. This parameter can be configured to include the inactive relations.
+    + withTags (string, optional,`tag1;tag2`) ... Select relations that have the configured tag(s)
+    + withoutTags (string, optional, `tag1;tag2`) ... Select relations that do not have the configured tag(s)
 + Response 200 (application/json)
 
         [
@@ -407,6 +415,11 @@ Get a single relation with all linked relations.
             "mobile": "+32 479 99 99 99",
             "endFiscalYear": "2000-12-31T00:00:00",
             "vatNumber": "BE 0420.222.333",
+            "RsinNumber":"",
+            "KvkNumber":"",
+            "LoonheffingenNumber":"",
+            "OmzetbelastingNumber":"",
+            "BsnNumber":"",
             "totalRisk": 100,
             "purposeTransaction": "Anti - witwas : Doel van de relatie",
             "natureTransaction": "Anti - witwas : Aard van de transactie",
@@ -442,6 +455,7 @@ Get a single relation with all linked relations.
             "remark": "Small remark",
             "idCardNumber": "12345678901",
             "idCardNumberExpiryDate": "2021-12-31T00:00:00",
+            "paymentMethod": 1,
             "tags": [
                 "connect",
                 "postman"
