@@ -3,40 +3,91 @@ HOST: https://api.adminpulse.be
 
 # AdminPulse API documentation
 
-This documentation describes the adminpulse api endpoints.
+This document describes the AdminPulse API.
 In case you have any feedback or miss a certain functionality, let us know via support@adminpulse.be
 
-- API Base URL : <code>api.adminpulse.be</code>
-- API Identity token URL : <code>login.adminpulse.be/connect/token</code>
-- API Identity authorize URL : <code>login.adminpulse.be/connect/authorize</code>
 
 ###General
-####Errors
-Status codes
-- <code>200</code> OK
-- <code>400</code> Bad Request, the endpoint was called using invalid data
-- <code>401</code> Unauthorized, invalid or missing access token
-- <code>404</code> Resource not found, make sure the correct URL was used
-- <code>429</code> Too Many Requests, you're allowed to make 60 calls per minute.
-- <code>500</code> Internal Server Error, make sure the correct access token was provided
+####API endpoint
+The base API endpoint for all requests (excluding the authentication calls) is: <code>https://api.adminpulse.be</code>
+
+####Status codes
+
+- <code>200</code> OK: the request was processed successfully
+- <code>400</code> Bad request: the endpoint was called using invalid data
+- <code>401</code> Unauthorized: invalid or missing access token
+- <code>404</code> Resource not found: make sure the correct URL was used
+- <code>429</code> Too many requests: you're allowed to make 60 calls per minute. 
+- <code>500</code> Internal Server Error: an unexpected error occurred. Contact support if this problem keeps occurring.
 
 ### Authentication
-OAuth2 will be used to protect adminpulse endpoints.
-Before you can start using our endpoints, send a request to support@adminpulse.be to request a <code>client_id</code> and <code>client_secret</code> or Personal Access Token.
+The AdminPulse API offers 3 authentication methods:
+- OAuth with callback URL (recommended) 
+- OAuth using username/password (in case no callback URL is supported by the client app)
+- Using an API key
 
-####Option 1 - Using a website with callback url
-Keep in mind that you will have to register a <code>redirect URL</code> as well. This will be the URL being called by our OAuth authentication.
+Before you can start using our endpoints, send a request to support@adminpulse.be to request a <code>client_id</code> and <code>client_secret</code> or a personal access token.
 
-<i>example</i> : https://yourcompany/adminpulse/callback
+####OAuth with callback URL
+Keep in mind that you will have to register a <code>redirect URL</code> as well. This URL will be called after the user has logged in.
 
-Call the authorize endpoint using the specific parameters
+Example: <i>https://yourcompany.com/adminpulse/callback</i>
+######1. Setup the authorization URL 
+The authorization URL is: <code>https://login.adminpulse.be/connect/authorize</code>
 
+The following query string parameters should be added. Make sure to sure URL encoding.
+- <code>client_id</code> the client ID that you received from the AdminPulse team
+- <code>response_type=code</code>
+- <code>scope=api.connect</code> api.connect is currently the only scope available. Add the <code>offline_access</code> scope in to be able to request refresh tokens.
+- <code>redirect_uri</code> this is the callback URL that you registered with the AdminPulse team.
+- <code>state</code> optionally you can pass state which will be included when the callback URL is called.
+
+This is an example of a full authorization URL:
 <code>https://login.adminpulse.be/connect/authorize?client_id=***&response_type=code&scope=api.connect%20offline_access&redirect_uri=https://***/callback</code>
 
-_Note : keep in mind that scopes need to be space delimited (using the %20 encoding)_
+_Note: keep in mind that scopes need to be space delimited (using the %20 encoding)_
 
-####Option 2 - Using a client application (or service)
-In this case, no specific redirect or callback URL needs to be registered.
+######2. Obtaining an access token
+After the authorization URL has been called and the user logged in successfully, the callback URL is called using a <code>GET</code> request with a query string parameter <code>code</code>. This code will be used to obtain an access token.
+
+The token endpoint is: <code>https://login.adminpulse.be/connect/token</code>
+
+Make a <code>POST</code> call with the following x-www-form-urlencoded data:
+
+- <code>code</code> the code received via query string parameters
+- <code>redirect_uri</code>: https://yourcompany.com/adminpulse/callback
+- <code>grant_type=authorization_code</code>
+- <code>client_id</code>: the client ID that you received from the AdminPulse team
+- <code>client_secret</code>: the client secret that you received from the AdminPulse team
+
+
+You receive the following parameters in the JSON body response:
+
+- <code>access_token</code> the actual access token that will be used in the Authorization header for further requests to all API endpoints 
+- <code>token_type</code> the token type will always be Bearer
+- <code>expires_in</code> when the access token will expire (in seconds)
+- <code>refresh_token</code> the refresh token. Store this so can request a new token when the access token has expired.
+
+######3. Refreshing an access token
+The endpoint is: <code>https://login.adminpulse.be/connect/token</code>
+
+Make a <code>POST</code> call with the following x-www-form-urlencoded data:
+
+- <code>refresh_token</code> the refresh token that you stored from a previous request
+- <code>grant_type=refresh_token</code>
+- <code>client_id</code>: the client ID that you received from the AdminPulse team
+- <code>client_secret</code>: the client secret that you received from the AdminPulse team
+
+
+You receive the following parameters in the JSON body response:
+
+- <code>access_token</code> a new access token
+- <code>token_type</code> the token type will always be Bearer
+- <code>expires_in</code> when the access token will expire (in seconds)
+- <code>refresh_token</code> the refresh token
+
+####OAuth using username/password
+In this case, no specific callback URL needs to be registered.
 Call (post) the token endpoint to get access and refreshtokens
 <code>https://login.adminpulse.be/connect/token</code>
 
@@ -44,9 +95,9 @@ Call (post) the token endpoint to get access and refreshtokens
 - username=***
 - password=***
 
-####Option 3 - Using a Personal Access Token
-In this case, a token will be given to you by the AdminPulse team. This token does not need to be refreshed, after being given the token, you can use it in the following header:
-<code>Authorization: Bearer {PAT}</code>
+####Using an API key
+In this case, a token will be given to you by the AdminPulse team. This token does not need to be refreshed, after being given the token, you can use it in the Authorization header:
+<code>Authorization: Bearer &lt;token&gt;</code>
 
 ###Scopes
 
