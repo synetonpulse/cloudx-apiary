@@ -119,6 +119,11 @@ The amount of calls remaining can be checked by looking at these response header
 
 Please note: the minute referred to above is a sliding window (defaults to 60/min).
 
+###Postman
+Check our postman collection to explore our API, check multiple examples and generate code based on your desired programming language.
+
+https://postman.adminpulse.be/
+
 ###Changelog
 #### 2022 - september
 - Relation tags (add / remove)
@@ -141,12 +146,6 @@ Please note: the minute referred to above is a sliding window (defaults to 60/mi
 - api.adminpulse.be/relations/**person/add**
 - api.adminpulse.be/relations/**company/add**
 - api.adminpulse.be/relations/**soleproprietor/add**
-
-
-####Postman
-Check our postman collection to explore our API, check multiple examples and generate code based on your desired programming language.
-
-https://postman.adminpulse.be/
 
 # Group Relations
 #### CRM type
@@ -1101,9 +1100,9 @@ More information can be found here : https://syneton.zendesk.com/hc/articles/360
 * Condition = 2
 * AutomaticMail = 3
 
-## List tasktemplates [/tasks/templates?languageCode={languageCode}]
-### List tasktemplates [GET]
-A task can be based upon a task template. Each main task, can have multiple subtasks.
+## List task templates [/tasks/templates?languageCode={languageCode}]
+### List task templates [GET]
+A task can be based upon a task template. Each task can have multiple subtasks.
 + Request (application/json)
     + Attributes
         + languageCode: `nl | fr | en` (string, optional) - If no languageCode was passed, the languageCode of the user will be used.
@@ -1226,18 +1225,6 @@ A task can be based upon a task template. Each main task, can have multiple subt
 * FixedAmount = 1,
 * AdvanceSettlement = 2
 
-## Add invoice schedule [/invoiceschedule/add]
-Add an invoice schedule to a relation
-### Add [POST]
-
-+ Request (application/json)
-    + Attributes
-        + relationId: `44b0e8ee-57fa-4dee-b6e0-cc816643bd7b` (string, required)
-        + invoicingType: `RegistrationBased` (string, required)
-        + numberOfInvoicesPerYear: `12` (number, required)
-        + amount: `150` (number)
-        + ledger: `the ledger` (string)
-+ Response 200 (application/json)
 
 ## Get invoice schedules [/relations/{uniqueidentifier}/invoiceschedules]
 Gets all invoice schedules for a relation
@@ -1255,3 +1242,16 @@ Gets all invoice schedules for a relation
             "amountOfLinesPerYear": 6,
             "invoicingType": 1
         }
+        
+## Add invoice schedule [/invoiceschedule/add]
+Add an invoice schedule to a relation
+### Add [POST]
+
++ Request (application/json)
+    + Attributes
+        + relationId: `44b0e8ee-57fa-4dee-b6e0-cc816643bd7b` (string, required)
+        + invoicingType: `RegistrationBased|FixedAmount|AdvanceSettlement` (string, required)
+        + numberOfInvoicesPerYear: `12` (number, required)
+        + amount: `150` (number)
+        + ledger: `Ledger account` (string)
++ Response 200 (application/json)
