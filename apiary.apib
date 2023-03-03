@@ -20,7 +20,7 @@ The base API endpoint for all requests (excluding the authentication calls) is: 
 - <code>429</code> Too many requests: you're allowed to make 60 calls per minute. 
 - <code>500</code> Internal Server Error: an unexpected error occurred. Contact support if this problem keeps occurring.
 
-### Authentication
+### Authentication [/connect/token]
 The AdminPulse API offers 3 authentication methods:
 - OAuth with callback URL (recommended) 
 - OAuth using username/password (in case no callback URL is supported by the client app)
@@ -49,7 +49,7 @@ This is an example of a full authorization URL:
 
 _Note: keep in mind that scopes need to be space delimited (using the %20 encoding)_
 
-######2. Obtaining an access token
+######2. Obtaining an access token [POST]
 After the authorization URL has been called and the user logged in successfully, the callback URL is called using a <code>GET</code> request with a query string parameter <code>code</code>. This code will be used to obtain an access token.
 
 The token endpoint is: <code>https://login.adminpulse.be/connect/token</code>
@@ -70,7 +70,24 @@ You receive the following parameters in the JSON body response:
 - <code>expires_in</code> when the access token will expire (in seconds)
 - <code>refresh_token</code> the refresh token. Store this so can request a new token when the access token has expired.
 
-######3. Refreshing an access token
++ Request (application/x-www-form-urlencoded)
+    + Attributes
+        + code: code (string, required)
+        + redirect_uri: https://yourcompany.com/adminpulse/callback (string, required)
+        + grant_type: authorization_code (string, required)
+        + client_id: clientId (string, required)
+        + client_secret: clientSecret (string, required)
+
++ Response 200 (application/json)
+
+        {
+            "access_token": "token",
+            "token_type": "Bearer",
+            "expires_in": 3600,
+            "refresh_token": "refresh_token"
+        }
+
+######3. Refreshing an access token [POST]
 The endpoint is: <code>https://login.adminpulse.be/connect/token</code>
 
 Make a <code>POST</code> call with the following x-www-form-urlencoded data:
@@ -88,7 +105,24 @@ You receive the following parameters in the JSON body response:
 - <code>expires_in</code> when the access token will expire (in seconds)
 - <code>refresh_token</code> the refresh token
 
-####OAuth using username/password
+
++ Request (application/x-www-form-urlencoded)
+    + Attributes
+        + refresh_token: token (string, required)
+        + grant_type: refreshToken (string, required)
+        + client_id: clientId (string, required)
+        + client_secret: clientSecret (string, required)
+
++ Response 200 (application/json)
+
+        {
+            "access_token": "token",
+            "token_type": "Bearer",
+            "expires_in": 3600,
+            "refresh_token": "refresh_token"
+        }
+
+####OAuth using username/password [GET]
 In this case, no specific callback URL needs to be registered.
 Call (post) the token endpoint to get access and refreshtokens
 <code>https://login.adminpulse.be/connect/token</code>
@@ -96,6 +130,21 @@ Call (post) the token endpoint to get access and refreshtokens
 - grant_type=password
 - username=***
 - password=***
+
++ Request (application/x-www-form-urlencoded)
+    + Attributes
+        + grant_type: password (string, required)
+        + username: *** (string, required)
+        + password: *** (string, required)
+
++ Response 200 (application/json)
+
+        {
+            "access_token": "token",
+            "token_type": "Bearer",
+            "expires_in": 3600,
+            "refresh_token": "refresh_token"
+        }
 
 ####Using an API key
 In this case, a token will be given to you by the AdminPulse team. This token does not need to be refreshed, after being given the token, you can use it in the Authorization header:
@@ -1196,9 +1245,10 @@ A task can be based upon a task template. Each task can have multiple subtasks.
     + Attributes
         + title: `This is a sample interaction title` (string, required)
         + description: `This is a sample description` (string)
-        + relationIdentifier: `APR00001` (string)
+        + relationIdentifier: `APR00001` (string, required)
         + interactiontype: `0` (number)
         + deadline: `30122020` (string, required) - Date format as ddMMyyyy
+        + time : `20:00` (string, required)
 
 + Response 200 (application/json)
 
