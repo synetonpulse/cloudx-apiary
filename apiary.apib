@@ -87,7 +87,7 @@ You receive the following parameters in the JSON body response:
             "refresh_token": "refresh_token"
         }
 
-######3. Refreshing an access token [POST]
+######3. Refreshing an access token n
 The endpoint is: <code>https://login.adminpulse.be/connect/token</code>
 
 Make a <code>POST</code> call with the following x-www-form-urlencoded data:
@@ -430,7 +430,7 @@ List all relations with linked relations included (see single relation for all p
             
         ]
 
-## Single relation [/relations/{uniqueidentifier}]
+## Get single relation [/relations/{uniqueidentifier}]
 
 ### GET [GET]
 Get a single relation with all linked relations.
@@ -556,6 +556,8 @@ Get a single relation with all linked relations.
             }
         ]
 
+## Get communications  [/relations]
+
 ### GET Communication [GET /relations/communication/{uniqueidentifier}]
 Get a single relation with all linked relations.
 
@@ -603,6 +605,32 @@ Get a single relation with all linked relations.
                 }
             ]
         }
+        
+## Get bankaccounts  [/relations]
+
+### GET bankaccounts [GET /relations/{uniqueidentifier}/bankaccounts]
+Get all bankaccounts for a given relation.
+
++ Parameters
+    + uniqueidentifier (string, required, `APR00132`) The unique identifier, as defined by Admin Pulse.
+
++ Response 200 (application/json)
+
+[
+    {
+        "id": "12d75ffa-00d0-eb11-ba5e-501ac5677770",
+        "bankAccountNumber": "BE71096123451234",
+        "bic": "GKCCBEBB",
+        "remark": "Sample account",
+        "bankName": "Belfius",
+        "countryCode": "BE"
+    },
+    {
+        "id": "1234f069-01d0-eb11-ba5e-501ac5684770",
+        "bankAccountNumber": "LU280019400612340000",
+        "countryCode": "LU"
+    }
+]     
         
 ## Add relation  [/relations]
 
