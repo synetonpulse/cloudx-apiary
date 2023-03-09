@@ -20,7 +20,7 @@ The base API endpoint for all requests (excluding the authentication calls) is: 
 - <code>429</code> Too many requests: you're allowed to make 60 calls per minute. 
 - <code>500</code> Internal Server Error: an unexpected error occurred. Contact support if this problem keeps occurring.
 
-### Authentication [/connect/token]
+### Authentication(
 The AdminPulse API offers 3 authentication methods:
 - OAuth with callback URL (recommended) 
 - OAuth using username/password (in case no callback URL is supported by the client app)
@@ -49,7 +49,7 @@ This is an example of a full authorization URL:
 
 _Note: keep in mind that scopes need to be space delimited (using the %20 encoding)_
 
-######2. Obtaining an access token [POST]
+######2. Obtaining an access token
 After the authorization URL has been called and the user logged in successfully, the callback URL is called using a <code>GET</code> request with a query string parameter <code>code</code>. This code will be used to obtain an access token.
 
 The token endpoint is: <code>https://login.adminpulse.be/connect/token</code>
@@ -87,7 +87,7 @@ You receive the following parameters in the JSON body response:
             "refresh_token": "refresh_token"
         }
 
-######3. Refreshing an access token [POST]
+#####3. Refreshing an access token
 The endpoint is: <code>https://login.adminpulse.be/connect/token</code>
 
 Make a <code>POST</code> call with the following x-www-form-urlencoded data:
@@ -122,7 +122,7 @@ You receive the following parameters in the JSON body response:
             "refresh_token": "refresh_token"
         }
 
-####OAuth using username/password [GET]
+####OAuth using username/password
 In this case, no specific callback URL needs to be registered.
 Call (post) the token endpoint to get access and refreshtokens
 <code>https://login.adminpulse.be/connect/token</code>
@@ -159,7 +159,7 @@ To get a refresh token, you must request the offline_access scope. A refresh tok
 <li>offline_access (optional)</li>
 </ul>
 
-###Rate limiting
+### Rate limiting
 Your calls are rate limited by a combination of your unique client_id and the tenant you're making calls for (with a fallback value of the caller's IP Address).
 
 The amount of calls remaining can be checked by looking at these response headers of each request:
@@ -174,6 +174,9 @@ Check our postman collection to explore our API, check multiple examples and gen
 https://postman.adminpulse.be/
 
 ###Changelog
+#### 2023 - march
+- Relation bankaccounts
+
 #### 2022 - september
 - Relation tags (add / remove)
 - Relation activate / deactivate
@@ -189,12 +192,6 @@ https://postman.adminpulse.be/
 - Get tasks
 - Get relation communication information
 - Upload a relation eID 
-
-#### 2022 - January 
-- It is now possible to create relations using 
-- api.adminpulse.be/relations/**person/add**
-- api.adminpulse.be/relations/**company/add**
-- api.adminpulse.be/relations/**soleproprietor/add**
 
 # Group Relations
 #### CRM type
@@ -606,7 +603,7 @@ Get a single relation with all linked relations.
             ]
         }
         
-## Get bankaccounts  [/relations]
+## Get bankaccounts  [/bankaccounts]
 
 ### GET bankaccounts [GET /relations/{uniqueidentifier}/bankaccounts]
 Get all bankaccounts for a given relation.
@@ -616,23 +613,23 @@ Get all bankaccounts for a given relation.
 
 + Response 200 (application/json)
 
-[
-    {
-        "id": "12d75ffa-00d0-eb11-ba5e-501ac5677770",
-        "bankAccountNumber": "BE71096123451234",
-        "bic": "GKCCBEBB",
-        "remark": "Sample account",
-        "bankName": "Belfius",
-        "countryCode": "BE"
-    },
-    {
-        "id": "1234f069-01d0-eb11-ba5e-501ac5684770",
-        "bankAccountNumber": "LU280019400612340000",
-        "countryCode": "LU"
-    }
-]     
+        [
+            {
+                "id": "12d75ffa-00d0-eb11-ba5e-501ac5677770",
+                "bankAccountNumber": "BE71096123451234",
+                "bic": "GKCCBEBB",
+                "remark": "Sample account",
+                "bankName": "Belfius",
+                "countryCode": "BE"
+            },
+            {
+                "id": "1234f069-01d0-eb11-ba5e-501ac5684770",
+                "bankAccountNumber": "LU280019400612340000",
+                "countryCode": "LU"
+            }
+        ]     
         
-## Add relation  [/relations]
+## Add relation  [/add]
 
 ### POST Company [POST /relations/company/add]
 Create a relation of type Company.
