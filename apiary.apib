@@ -124,18 +124,26 @@ You receive the following parameters in the JSON body response:
 
 ####OAuth using username/password
 In this case, no specific callback URL needs to be registered.
-Call (post) the token endpoint to get access and refreshtokens
-<code>https://login.adminpulse.be/connect/token</code>
 
-- grant_type=password
-- username=***
-- password=***
+The endpoint is: <code>https://login.adminpulse.be/connect/token</code>
+
+Make a <code>POST</code> call with the following x-www-form-urlencoded data:
+
+- <code>grant_type=password</code>
+- <code>username</code> your username
+- <code>password</code> your password
+- <code>client_id</code> the client ID that you received from the AdminPulse team
+- <code>client_secret</code> the client secret that you received from the AdminPulse team
+- <code>scope=api.connect</code> api.connect is currently the only scope available. Add the <code>offline_access</code> scope in to be able to request refresh tokens.
+
 
 + Request (application/x-www-form-urlencoded)
     + Attributes
         + grant_type: password (string, required)
         + username: *** (string, required)
         + password: *** (string, required)
+        + client_id: clientId (string, required)
+        + client_secret: clientSecret (string, required)
 
 + Response 200 (application/json)
 
