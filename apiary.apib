@@ -741,12 +741,16 @@ Update a given relation with an eid file (can be XML or PDF document)
         
 + Response 200 (application/json)
 
-### Deactivate relation [PUT /relations/{uniqueIdentifier}/deactivate]
-
+### Activate relation [PUT /relations/{uniqueIdentifier}/activate]
+Activating a relation will remove the end date of a relation, if present.
 + Response 200 (application/json)
 
-### Activate relation [PUT /relations/{uniqueIdentifier}/activate]
-
+### Deactivate relation [PUT /relations/{uniqueIdentifier}/deactivate]
+Deactivating a relation will make the relation inactive. If no end date is passed, the current date will be used. After this date, the relation will no longer be available to create new registrations, invoices, tasks, ... but will still remain available for reading purposes.
++ Request (application/json)
+    + Attributes
+        + endDate: `01012020`  (string) - Date format as ddMMyyyy
+       
 + Response 200 (application/json)
 
 ## Update relation  [/relations/update]
